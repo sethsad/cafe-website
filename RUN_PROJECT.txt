@@ -1,0 +1,14 @@
+To run the Cafe Aroma project after closing it:
+
+1. Double-click Start-Cafe-Website.bat
+2. Wait for the browser to open
+3. Login with:
+
+   username: admin
+   password: cafe123
+
+This starts:
+- MAMP MySQL on port 3306
+- WAMP PHP server on port 8000
+
+Do not use MAMP PHP for this project because its PHP setup does not include the MySQL PDO driver.

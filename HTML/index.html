@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="icon" type="image/x-icon" href="/img/logo.jpg">
+
+  <title>Cafe Aroma</title>
+  <link rel="stylesheet" href="/CSS/Style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/HTML/Index.html" aria-label="Cafe Aroma home">
+      <span class="brand-mark">CA</span>
+      <span>Cafe Aroma</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#menu">Menu</a>
+      <a href="#featured">Favorites</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#about">About</a>
+      <a href="/HTML/Dashboard.html">Dashboard</a>
+      <a href="/HTML/Login.html">Login</a>
+    </nav>
+
+    <button class="cart-trigger" type="button" onclick="toggleCart()" aria-label="Open cart">
+      <span>Cart</span>
+      <span id="cart-count">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Cafe Aroma welcome">
+      <div class="hero-slide active" style="background-image: url('/img/png-05.jpg');">
+        <div class="hero-content">
+          <p class="eyebrow">Fresh coffee, calm mornings</p>
+          <h1>Handcrafted cafe drinks for every kind of day.</h1>
+          <a class="hero-action" href="#menu">Order now</a>
+        </div>
+      </div>
+      <div class="hero-slide" style="background-image: url('/img/png-06.jpg');">
+        <div class="hero-content">
+          <p class="eyebrow">Small batch brews</p>
+          <h1>Signature espresso, steamed milk, and cozy bites.</h1>
+          <a class="hero-action" href="#featured">See favorites</a>
+        </div>
+      </div>
+      <div class="hero-slide" style="background-image: url('/img/png-07.jpg');">
+        <div class="hero-content">
+          <p class="eyebrow">Stay a little longer</p>
+          <h1>A warm cafe corner made for work, talks, and quiet breaks.</h1>
+          <a class="hero-action" href="#about">Visit us</a>
+        </div>
+      </div>
+
+      <button class="hero-control hero-prev" type="button" onclick="prevHero()" aria-label="Previous slide">&#8249;</button>
+      <button class="hero-control hero-next" type="button" onclick="nextHero()" aria-label="Next slide">&#8250;</button>
+    </section>
+
+    <section class="promo-strip" aria-label="Cafe highlights">
+      <div>
+        <strong>100%</strong>
+        <span>Arabica beans</span>
+      </div>
+      <div>
+        <strong>Daily</strong>
+        <span>Fresh pastries</span>
+      </div>
+      <div>
+        <strong>Fast</strong>
+        <span>Pickup orders</span>
+      </div>
+    </section>
+
+    <section id="featured" class="featured">
+      <div class="section-heading">
+        <p class="eyebrow">Cafe favorites</p>
+        <h2>Top orders</h2>
+      </div>
+
+      <div class="featured-grid">
+        <article class="featured-card">
+          <span class="badge">Best seller</span>
+          <img src="/img/png-01.jpg" alt="Iced caramel latte">
+          <div>
+            <h3>Iced Caramel Latte</h3>
+            <p>Espresso, cold milk, caramel, and a smooth finish.</p>
+          </div>
+          <button class="add-cart" type="button" data-name="Iced Caramel Latte" data-price="4.75">Add to Cart</button>
+        </article>
+
+        <article class="featured-card">
+          <span class="badge">New</span>
+          <img src="/img/png-02.jpg" alt="Matcha cream latte">
+          <div>
+            <h3>Matcha Cream Latte</h3>
+            <p>Earthy matcha with velvety milk and soft cream.</p>
+          </div>
+          <button class="add-cart" type="button" data-name="Matcha Cream Latte" data-price="4.25">Add to Cart</button>
+        </article>
+
+        <article class="featured-card">
+          <span class="badge">Classic</span>
+          <img src="/img/png-03.jpg" alt="Cafe mocha">
+          <div>
+            <h3>Cafe Mocha</h3>
+            <p>Chocolate, espresso, steamed milk, and cocoa dust.</p>
+          </div>
+          <button class="add-cart" type="button" data-name="Cafe Mocha" data-price="4.50">Add to Cart</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="seasonal-banner" aria-label="Seasonal special">
+      <div>
+        <p class="eyebrow">Seasonal drop</p>
+        <h2>Brown Sugar Cold Brew is here.</h2>
+        <p>Slow-steeped coffee, brown sugar syrup, oat milk foam, and a cinnamon finish.</p>
+      </div>
+      <button class="add-cart" type="button" data-name="Brown Sugar Cold Brew" data-price="5.25" data-category="cold">Add to Cart</button>
+    </section>
+
+    <section id="menu" class="menu-section">
+      <div class="section-heading">
+        <p class="eyebrow">Order ahead</p>
+        <h2>Handcrafted menu</h2>
+      </div>
+
+      <div class="menu-tools" aria-label="Menu filters">
+        <div class="category-tabs">
+          <button class="tab-btn active" type="button" data-filter="all">All</button>
+          <button class="tab-btn" type="button" data-filter="hot">Hot Coffee</button>
+          <button class="tab-btn" type="button" data-filter="cold">Cold Coffee</button>
+          <button class="tab-btn" type="button" data-filter="blended">Frappe</button>
+          <button class="tab-btn" type="button" data-filter="tea">Tea</button>
+          <button class="tab-btn" type="button" data-filter="bakery">Bakery</button>
+        </div>
+        <label class="search-wrap" for="menu-search">
+          <span>Search</span>
+          <input id="menu-search" type="search" placeholder="Find latte, mocha, croissant...">
+        </label>
+      </div>
+
+      <div class="menu" id="menu-list">
+        <article class="menu-item" data-category="hot" data-name="Espresso">
+          <img src="/img/png-08.avif" alt="Espresso" class="menu-img">
+          <div class="menu-copy">
+            <span class="category">Hot coffee</span>
+            <h3>Espresso</h3>
+            <p>Bold, compact, and rich with crema.</p>
+          </div>
+          <div class="menu-bottom">
+            <strong>$2.50</strong>
+            <button class="customize-btn" type="button" data-name="Espresso" data-price="2.50" data-category="hot">Customize</button>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="hot" data-name="Cappuccino">
+          <img src="/img/png-09.png" alt="Cappuccino" class="menu-img">
+          <div class="menu-copy">
+            <span class="category">Hot coffee</span>
+            <h3>Cappuccino</h3>
+            <p>Espresso with steamed milk and airy foam.</p>
+          </div>
+          <div class="menu-bottom">
+            <strong>$3.00</strong>
+            <button class="customize-btn" type="button" data-name="Cappuccino" data-price="3.00" data-category="hot">Customize</button>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="hot" data-name="Vanilla Latte">
+          <img src="/img/png-03.avif" alt="Vanilla latte" class="menu-img">
+          <div class="menu-copy">
+            <span class="category">Signature</span>
+            <h3>Vanilla Latte</h3>
+            <p>Silky milk, espresso, and gentle vanilla.</p>
+          </div>
+          <div class="menu-bottom">
+            <strong>$3.75</strong>
+            <button class="customize-btn" type="button" data-name="Vanilla Latte" data-price="3.75" data-category="hot">Customize</button>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="cold" data-name="Cold Brew">
+          <img src="/img/png-10.png" alt="Cold brew" class="menu-img">
+          <div class="menu-copy">
+            <span class="category">Cold coffee</span>
+            <h3>Cold Brew</h3>
+            <p>Slow-steeped coffee served crisp over ice.</p>
+          </div>
+          <div class="menu-bottom">
+            <strong>$4.00</strong>
+            <button class="customize-btn" type="button" data-name="Cold Brew" data-price="4.00" data-category="cold">Customize</button>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="blended" data-name="Chocolate Frappe">
+          <img src="/img/png-02.png" alt="Chocolate frappe" class="menu-img">
+          <div class="menu-copy">
+            <span class="category">Blended</span>
+            <h3>Chocolate Frappe</h3>
+            <p>Chilled chocolate coffee with whipped cream.</p>
+          </div>
+          <div class="menu-bottom">
+            <strong>$4.95</strong>
+            <button class="customize-btn" type="button" data-name="Chocolate Frappe" data-price="4.95" data-category="blended">Customize</button>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="bakery" data-name="Butter Croissant">
+          <img src="/img/png-04.jpg" alt="Butter croissant" class="menu-img">
+          <div class="menu-copy">
+            <span class="category">Bakery</span>
+            <h3>Butter Croissant</h3>
+            <p>Flaky pastry baked golden each morning.</p>
+          </div>
+          <div class="menu-bottom">
+            <strong>$2.95</strong>
+            <button class="customize-btn" type="button" data-name="Butter Croissant" data-price="2.95" data-category="bakery">Customize</button>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="tea" data-name="Iced Matcha Tea">
+          <img src="/img/png-02.jpg" alt="Iced matcha tea" class="menu-img">
+          <div class="menu-copy">
+            <span class="category">Tea</span>
+            <h3>Iced Matcha Tea</h3>
+            <p>Green tea, milk, ice, and a smooth earthy finish.</p>
+          </div>
+          <div class="menu-bottom">
+            <strong>$4.25</strong>
+            <button class="customize-btn" type="button" data-name="Iced Matcha Tea" data-price="4.25" data-category="tea">Customize</button>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="bakery" data-name="Chocolate Muffin">
+          <img src="/img/png-03.jpg" alt="Chocolate muffin" class="menu-img">
+          <div class="menu-copy">
+            <span class="category">Bakery</span>
+            <h3>Chocolate Muffin</h3>
+            <p>Soft cocoa muffin with dark chocolate chips.</p>
+          </div>
+          <div class="menu-bottom">
+            <strong>$3.25</strong>
+            <button class="customize-btn" type="button" data-name="Chocolate Muffin" data-price="3.25" data-category="bakery">Customize</button>
+          </div>
+        </article>
+      </div>
+      <p class="no-results" id="no-results">No menu items found.</p>
+    </section>
+
+    <section id="rewards" class="rewards-section">
+      <div class="rewards-copy">
+        <p class="eyebrow">Cafe Aroma Rewards</p>
+        <h2>Earn points every time you order.</h2>
+        <p>Collect points from drinks and bakery items, then redeem them for free upgrades, seasonal specials, and birthday treats.</p>
+      </div>
+      <div class="rewards-steps">
+        <div>
+          <strong>1</strong>
+          <h3>Join</h3>
+          <p>Create an account in seconds.</p>
+        </div>
+        <div>
+          <strong>2</strong>
+          <h3>Order</h3>
+          <p>Earn points on every purchase.</p>
+        </div>
+        <div>
+          <strong>3</strong>
+          <h3>Redeem</h3>
+          <p>Use rewards for coffee and treats.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews-section">
+      <div class="section-heading">
+        <p class="eyebrow">Customer love</p>
+        <h2>What guests are saying</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <article>
+          <span>5.0</span>
+          <p>"The iced latte is smooth, balanced, and always ready fast."</p>
+          <strong>Sokha M.</strong>
+        </article>
+        <article>
+          <span>5.0</span>
+          <p>"Great place to study. The staff remembers my usual order."</p>
+          <strong>Dara V.</strong>
+        </article>
+        <article>
+          <span>4.9</span>
+          <p>"Fresh pastries in the morning and the cold brew is excellent."</p>
+          <strong>Lina K.</strong>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="about-section">
+      <img src="/img/png-04.jpg" alt="Cafe Aroma interior" class="about-img">
+      <div class="about-text">
+        <p class="eyebrow">Our cafe</p>
+        <h2>A warm place for coffee, work, and friends.</h2>
+        <p>At Cafe Aroma, every cup is brewed with care and every pastry is made to pair with a slower moment. Stop in for a quiet morning, a quick pickup, or a table with your favorite people.</p>
+        <button class="toggle-btn" type="button" onclick="toggleMode()">Toggle Dark Mode</button>
+      </div>
+    </section>
+
+    <section class="location-section">
+      <div>
+        <p class="eyebrow">Visit us</p>
+        <h2>Store hours and location</h2>
+        <p>Street 123, Riverside, Phnom Penh</p>
+      </div>
+      <div class="location-grid">
+        <div>
+          <span>Hours</span>
+          <strong>Mon - Sun, 7:00 AM - 9:00 PM</strong>
+        </div>
+        <div>
+          <span>Phone</span>
+          <strong>+855 12 345 678</strong>
+        </div>
+        <a class="map-link" href="https://www.google.com/maps" target="_blank" rel="noreferrer">Open Map</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Cafe Aroma. Crafted fresh daily.</p>
+  </footer>
+
+  <aside class="cart-popup" id="cart-popup" aria-hidden="true">
+    <button class="cart-overlay" type="button" onclick="toggleCart()" aria-label="Close cart"></button>
+    <div class="cart-box" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-header">
+        <div>
+          <p class="eyebrow">Pickup order</p>
+          <h2 id="cart-title">Your Cart</h2>
+        </div>
+        <button class="close-btn" type="button" onclick="toggleCart()" aria-label="Close cart">&times;</button>
+      </div>
+      <div class="cart-body">
+        <ul id="cart-items"></ul>
+        <p class="empty-cart" id="empty-cart">Your cart is empty.</p>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <strong>$<span id="total">0.00</span></strong>
+        </div>
+        <form class="checkout-form" id="checkout-form">
+          <label>
+            Name
+            <input id="customer-name" type="text" placeholder="Your name" required>
+          </label>
+          <label>
+            Phone
+            <input id="customer-phone" type="tel" placeholder="Phone number" required>
+          </label>
+          <label>
+            Pickup time
+            <select id="pickup-time" required>
+              <option value="ASAP">ASAP</option>
+              <option value="15 minutes">15 minutes</option>
+              <option value="30 minutes">30 minutes</option>
+              <option value="1 hour">1 hour</option>
+            </select>
+          </label>
+          <label>
+            Payment
+            <select id="payment-method" required>
+              <option value="Cash">Cash</option>
+              <option value="Card">Card</option>
+              <option value="ABA Pay">ABA Pay</option>
+            </select>
+          </label>
+        </form>
+        <div class="aba-pay-panel" id="aba-pay-panel" aria-live="polite">
+          <div>
+            <span class="aba-logo">ABA</span>
+            <strong>Scan to Pay</strong>
+            <p>Cafe Aroma</p>
+            <p>Amount: $<span id="aba-pay-total">0.00</span></p>
+          </div>
+          <img class="aba-qr-img" src="/img/ABA%20QR.jpg" alt="ABA Pay QR code">
+        </div>
+        <button class="checkout-btn" type="button" onclick="checkout()">Checkout</button>
+        <button class="clear-btn" type="button" onclick="clearCart()">Clear Cart</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="custom-modal" id="custom-modal" aria-hidden="true">
+    <button class="modal-overlay" type="button" onclick="closeCustomize()" aria-label="Close customization"></button>
+    <form class="custom-box" id="custom-form" role="dialog" aria-modal="true" aria-labelledby="custom-title">
+      <div class="custom-header">
+        <div>
+          <p class="eyebrow">Customize drink</p>
+          <h2 id="custom-title">Menu Item</h2>
+          <p id="custom-price">$0.00</p>
+        </div>
+        <button class="close-btn" type="button" onclick="closeCustomize()" aria-label="Close customization">&times;</button>
+      </div>
+
+      <div class="option-grid">
+        <fieldset>
+          <legend>Size</legend>
+          <label><input type="radio" name="size" value="Tall" data-extra="0" checked> Tall</label>
+          <label><input type="radio" name="size" value="Grande" data-extra="0.75"> Grande +$0.75</label>
+          <label><input type="radio" name="size" value="Venti" data-extra="1.25"> Venti +$1.25</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Milk</legend>
+          <label><input type="radio" name="milk" value="Whole milk" data-extra="0" checked> Whole milk</label>
+          <label><input type="radio" name="milk" value="Oat milk" data-extra="0.60"> Oat milk +$0.60</label>
+          <label><input type="radio" name="milk" value="Almond milk" data-extra="0.60"> Almond milk +$0.60</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sweetness</legend>
+          <label><input type="radio" name="sweetness" value="Less sweet" checked> Less sweet</label>
+          <label><input type="radio" name="sweetness" value="Regular"> Regular</label>
+          <label><input type="radio" name="sweetness" value="Extra sweet"> Extra sweet</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Ice</legend>
+          <label><input type="radio" name="ice" value="No ice"> No ice</label>
+          <label><input type="radio" name="ice" value="Light ice"> Light ice</label>
+          <label><input type="radio" name="ice" value="Regular ice" checked> Regular ice</label>
+        </fieldset>
+
+        <fieldset class="wide-field">
+          <legend>Add-ons</legend>
+          <label><input type="checkbox" name="addon" value="Caramel drizzle" data-extra="0.50"> Caramel drizzle +$0.50</label>
+          <label><input type="checkbox" name="addon" value="Extra shot" data-extra="0.85"> Extra shot +$0.85</label>
+          <label><input type="checkbox" name="addon" value="Whipped cream" data-extra="0.50"> Whipped cream +$0.50</label>
+        </fieldset>
+      </div>
+
+      <div class="custom-actions">
+        <strong id="custom-total">$0.00</strong>
+        <button class="checkout-btn" type="submit">Add Customized Item</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="receipt-modal" id="receipt-modal" aria-hidden="true">
+    <button class="modal-overlay" type="button" onclick="closeReceipt()" aria-label="Close receipt"></button>
+    <div class="receipt-box" role="dialog" aria-modal="true" aria-labelledby="receipt-title">
+      <div id="receipt-content"></div>
+      <div class="receipt-actions">
+        <button class="checkout-btn" type="button" onclick="printReceipt()">Print Receipt</button>
+        <button class="clear-btn" type="button" onclick="closeReceipt()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/JS/Script.js?v=7"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+CREATE DATABASE IF NOT EXISTS cafe_aroma
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE cafe_aroma;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  role ENUM('admin', 'staff') NOT NULL DEFAULT 'staff',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  order_code VARCHAR(32) NOT NULL UNIQUE,
+  customer_name VARCHAR(100) NOT NULL,
+  customer_phone VARCHAR(30) NOT NULL,
+  pickup_time VARCHAR(30) NOT NULL DEFAULT 'ASAP',
+  payment_method VARCHAR(30) NOT NULL DEFAULT 'Cash',
+  total DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+  status ENUM('received', 'preparing', 'ready', 'completed', 'cancelled') NOT NULL DEFAULT 'received',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  order_id INT UNSIGNED NOT NULL,
+  item_name VARCHAR(120) NOT NULL,
+  item_price DECIMAL(10, 2) NOT NULL,
+  quantity INT UNSIGNED NOT NULL,
+  options_json JSON NULL,
+  line_total DECIMAL(10, 2) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_order_items_order
+    FOREIGN KEY (order_id)
+    REFERENCES orders(id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS menu_items (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  category VARCHAR(40) NOT NULL,
+  label VARCHAR(80) NOT NULL,
+  description TEXT NOT NULL,
+  price DECIMAL(10, 2) NOT NULL,
+  image_url VARCHAR(255) NOT NULL,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS store_settings (
+  setting_key VARCHAR(80) PRIMARY KEY,
+  setting_value TEXT NOT NULL,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (username, password, name, role)
+VALUES ('admin', 'cafe123', 'Cafe Admin', 'admin')
+ON DUPLICATE KEY UPDATE
+  name = VALUES(name),
+  role = VALUES(role);
