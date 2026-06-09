@@ -587,6 +587,17 @@ function setDashboardMessage(message, isError = false) {
   dashboardMessage.classList.toggle("error", isError);
 }
 
+function showStaticDashboardState() {
+  const message = "Live dashboard data requires PHP and MySQL hosting. GitHub Pages can show the public website, but it cannot run admin data.";
+  setDashboardMessage(message, true);
+  if (storeMessage) storeMessage.textContent = message;
+  if (dashboardRecentOrders) dashboardRecentOrders.innerHTML = '<p class="dashboard-empty">Orders need PHP and MySQL hosting.</p>';
+  if (dashboardLatestProducts) dashboardLatestProducts.innerHTML = '<p class="dashboard-empty">Products need PHP and MySQL hosting.</p>';
+  if (dashboardItems) dashboardItems.innerHTML = '<p class="dashboard-empty">Product editing needs PHP and MySQL hosting.</p>';
+  if (dashboardOrders) dashboardOrders.innerHTML = '<p class="dashboard-empty">Order management needs PHP and MySQL hosting.</p>';
+  if (dashboardInvoices) dashboardInvoices.innerHTML = '<p class="dashboard-empty">Invoice history needs PHP and MySQL hosting.</p>';
+}
+
 function resetDashboardForm() {
   dashboardForm?.reset();
   const idInput = document.getElementById("dashboard-item-id");
@@ -829,7 +840,7 @@ async function loadStoreSettings() {
 
 function refreshDashboard() {
   if (isStaticSite) {
-    setDashboardMessage("Dashboard data requires PHP and MySQL hosting.", true);
+    showStaticDashboardState();
     return;
   }
 
@@ -862,6 +873,11 @@ async function deleteDashboardItem(id) {
 
 dashboardForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (isStaticSite) {
+    showStaticDashboardState();
+    return;
+  }
+
   const payload = getDashboardPayload();
   const isEditing = payload.id > 0;
 
@@ -887,6 +903,10 @@ dashboardForm?.addEventListener("submit", async (event) => {
 
 storeSettingsForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (isStaticSite) {
+    showStaticDashboardState();
+    return;
+  }
 
   const payload = {
     store_name: document.getElementById("store-name")?.value.trim() || "",
