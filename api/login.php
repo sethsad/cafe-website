@@ -19,7 +19,7 @@ function ensure_default_admin(): void
          VALUES (?, ?, ?, ?)
          ON DUPLICATE KEY UPDATE name = VALUES(name), role = VALUES(role)'
     );
-    $statement->execute(['admin', 'cafe123', 'Cafe Admin', 'admin']);
+    $statement->execute(['admin', password_hash('cafe123', PASSWORD_DEFAULT), 'Cafe Admin', 'admin']);
 }
 
 ensure_default_admin();
@@ -28,7 +28,21 @@ $statement = db()->prepare('SELECT username, password, name, role FROM users WHE
 $statement->execute([$username]);
 $user = $statement->fetch();
 
+if ($user && password_verify($password, (string)$user['password'])) {
+    send_json(200, [
+        'message' => 'Login successful.',
+        'user' => [
+            'username' => $user['username'],
+            'name' => $user['name'],
+            'role' => $user['role'],
+        ],
+    ]);
+}
+
 if ($user && hash_equals((string)$user['password'], $password)) {
+    $update = db()->prepare('UPDATE users SET password = ? WHERE username = ?');
+    $update->execute([password_hash($password, PASSWORD_DEFAULT), $user['username']]);
+
     send_json(200, [
         'message' => 'Login successful.',
         'user' => [
